@@ -1,16 +1,13 @@
 package airport_javafx_fxml;
 
-import airport_javafx_fxml.StageFactory;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
