@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airport_javafx_fxml.UsersController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="28.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#handleButtonAdd" prefHeight="25.0" prefWidth="60.0" text="Add">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="60.0" text="Remove">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnSetPass" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Set pass">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+               </children>
+            </HBox>
+            <TableView fx:id="tableUsers" onMouseClicked="#handleClickOnTable" onSwipeLeft="#handleDragDroped" prefHeight="351.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="colUser" prefWidth="155.0" text="User name" />
+                <TableColumn fx:id="colRole" prefWidth="199.0" text="Role" />
+              </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+            <HBox prefHeight="31.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="OK">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="handleButtonApply" mnemonicParsing="false" onAction="#handleButtonApply" prefHeight="25.0" prefWidth="60.0" text="Apply">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#handleButtonMainMenu" prefHeight="25.0" prefWidth="60.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin></Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
