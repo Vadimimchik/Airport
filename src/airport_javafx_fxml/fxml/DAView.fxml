@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -36,18 +37,24 @@
             <DatePicker fx:id="endDate" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="From" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="84.0" text="to" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleButtonMainMenu" prefHeight="25.0" prefWidth="95.0" text="Main menu" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TableView editable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="8" GridPane.rowIndex="2">
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleButtonMainMenu" prefHeight="25.0" prefWidth="95.0" text="Main menu" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TableView fx:id="tvDA" onKeyPressed="#handleKeyMainMenu" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="8" GridPane.rowIndex="2">
               <columns>
-                <TableColumn prefWidth="75.0" text="Flight" />
-                <TableColumn prefWidth="74.0" text="Date" />
-                  <TableColumn prefWidth="76.0" text="Time" />
-                  <TableColumn prefWidth="150.0" text="City" />
-                  <TableColumn prefWidth="180.0" text="Company" />
-                  <TableColumn prefWidth="58.0" text="Terminal" />
-                  <TableColumn prefWidth="40.0" text="Gate" />
+                <TableColumn fx:id="colFlight" prefWidth="75.0" text="Flight" />
+                <TableColumn fx:id="colDate" prefWidth="74.0" text="Date" />
+                  <TableColumn fx:id="colTime" prefWidth="76.0" text="Time" />
+                  <TableColumn fx:id="colCity" prefWidth="150.0" text="City" />
+                  <TableColumn fx:id="colCompany" prefWidth="180.0" text="Company" />
+                  <TableColumn fx:id="colTerminal" prefWidth="58.0" text="Terminal" />
+                  <TableColumn fx:id="colGate" prefWidth="40.0" text="Gate" />
               </columns>
             </TableView>
+            <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" onAction="#handleButtonOK" text="OK" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnPassengars" cancelButton="true" mnemonicParsing="false" onAction="#handleButtonPassengars" prefHeight="25.0" prefWidth="95.0" text="Passengers" GridPane.columnIndex="5" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

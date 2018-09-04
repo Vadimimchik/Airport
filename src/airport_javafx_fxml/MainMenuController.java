@@ -35,9 +35,14 @@ public class MainMenuController implements Initializable {
     private AnchorPane acMainMenu;
     
     private static String txtLbl;
+    private static boolean isArrival  = false;
     
-    public static String getTxtLbl(){
+    static String getTxtLbl(){
         return txtLbl;
+    }
+
+    static boolean isArrival(){
+        return isArrival;
     }
 
     @FXML
@@ -50,7 +55,13 @@ public class MainMenuController implements Initializable {
     private void handleButton(ActionEvent event) {
         String path = null;
         if (event.getSource().equals(btnDepartures) || event.getSource().equals(btnArrivals)) {
-            txtLbl = event.getSource().equals(btnDepartures) ? "Departure" : "Arrival";
+            if (event.getSource().equals(btnDepartures)) {
+                txtLbl =  "Departure";
+                isArrival = false;
+            } else {
+                txtLbl = "Arrival";
+                isArrival = true;
+            }
             path = "fxml/DAView.fxml";
         } else {
             txtLbl = "Users";

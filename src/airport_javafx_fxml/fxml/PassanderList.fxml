@@ -6,15 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airport_javafx_fxml.PassanderListController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airport_javafx_fxml.PassanderListController">
    <children>
       <VBox layoutX="208.0" layoutY="61.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="29.0" prefWidth="600.0" text="Label" />
-            <TableView prefHeight="318.0" prefWidth="600.0">
+            <TableView prefHeight="318.0" prefWidth="547.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="167.0" text="First Name" />
+                <TableColumn prefWidth="146.0" text="Last Name" />
+                  <TableColumn minWidth="9.0" prefWidth="106.0" text="Passport" />
               </columns>
             </TableView>
             <Button cancelButton="true" mnemonicParsing="false" onAction="#handleButtonMainMenu" text="Main menu" />

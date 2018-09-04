@@ -4,11 +4,13 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +26,7 @@ public class Model {
     private static Connection connection;
     private static ResultSet resultSet;
     private static PreparedStatement preparedStatementInsertUsers; 
+    private static PreparedStatement preparedStatementSelectDA; 
     private static Statement statement;
     private static final String URL = "jdbc:postgresql://localhost:5432/Airport";
     private static final String USER_NAME = "postgres";
@@ -34,6 +37,18 @@ public class Model {
             connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
             preparedStatementInsertUsers = connection.prepareStatement(
                 "INSERT into users (name, psw_hash, role) VALUES (?, ?, ?)",
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
+
+            preparedStatementSelectDA = connection.prepareStatement(
+                "SELECT flights.name flight, date, time, cities.city, ac.name company, terminals.name terminal, gate "
+                 + "FROM arrivals_departures ad "
+                 + "LEFT JOIN flights ON flights.id = flight "
+                 + "LEFT JOIN cities ON cities.id = flights.city "
+                 + "LEFT JOIN aircraft_companies ac ON ac.id = flights.aircraft_company "
+                 + "LEFT JOIN terminals ON terminals.id = terminal "
+                 + "LEFT JOIN gates ON gates.id = gate "
+                 + "WHERE date BETWEEN ? AND ?",
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);
         } catch (SQLException sqlException) {
@@ -74,7 +89,7 @@ public class Model {
     }
     
     public static ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<>();
         try {
            statement = connection.createStatement(
                    ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -91,6 +106,37 @@ public class Model {
         return users;
     }
     
+    public static ArrayList<DA> getDAs(boolean isArrival, LocalDate beginDate, LocalDate endDate) {
+        ArrayList<DA> das = new ArrayList<>();
+        String gate = null;
+        try {
+            preparedStatementSelectDA.setDate(1, Date.valueOf(beginDate));
+            preparedStatementSelectDA.setDate(2, Date.valueOf(endDate));
+            resultSet = preparedStatementSelectDA.executeQuery();
+            while (resultSet.next()) {
+                gate = resultSet.getString("gate");
+                if (!isArrival && gate == null)
+                    continue;
+                if (isArrival && gate != null)
+                    continue;
+                das.add(new DA(resultSet.getString("flight"), 
+                            resultSet.getString("date"), 
+                            resultSet.getString("time"), 
+                            resultSet.getString("city"), 
+                            resultSet.getString("company"), 
+                            resultSet.getString("terminal"), 
+                            gate
+                        )
+                );
+            }
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return das;
+    }
+
     public static void removeUsers() {
         try {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
