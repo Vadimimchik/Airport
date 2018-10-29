@@ -28,7 +28,7 @@
             <RowConstraints maxHeight="564.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <DatePicker fx:id="beginDate" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <DatePicker fx:id="beginDate" onAction="#handleBeginDate" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label fx:id="lblDA" alignment="CENTER" contentDisplay="CENTER" prefHeight="84.0" prefWidth="647.0" text="Departures" GridPane.columnSpan="8">
                <font>
                   <Font name="System Bold Italic" size="28.0" />

@@ -31,6 +31,7 @@ public class Model {
     private static final String URL = "jdbc:postgresql://localhost:5432/Airport";
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "masterkey";
+    private static int currentFlightID = -1;
     
     static {
         try {
@@ -41,7 +42,7 @@ public class Model {
                 ResultSet.CONCUR_UPDATABLE);
 
             preparedStatementSelectDA = connection.prepareStatement(
-                "SELECT flights.name flight, date, time, cities.city, ac.name company, terminals.name terminal, gate "
+                "SELECT flights.id id, flights.name flight, date, time, cities.city, ac.name company, terminals.name terminal, gate "
                  + "FROM arrivals_departures ad "
                  + "LEFT JOIN flights ON flights.id = flight "
                  + "LEFT JOIN cities ON cities.id = flights.city "
@@ -119,7 +120,8 @@ public class Model {
                     continue;
                 if (isArrival && gate != null)
                     continue;
-                das.add(new DA(resultSet.getString("flight"), 
+                das.add(new DA(resultSet.getInt("id"),
+                            resultSet.getString("flight"), 
                             resultSet.getString("date"), 
                             resultSet.getString("time"), 
                             resultSet.getString("city"), 
@@ -176,5 +178,13 @@ public class Model {
         }
         
         return res;
+    }
+
+    public static int getCurrentFlightID() {
+        return currentFlightID;
+    }
+
+    public static void setCurrentFlightID(int currentFlightID) {
+        Model.currentFlightID = currentFlightID;
     }
 }    

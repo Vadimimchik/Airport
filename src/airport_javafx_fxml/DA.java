@@ -14,6 +14,7 @@ import javafx.beans.property.StringProperty;
  * @author Vadim
  */
 public class DA {
+    private final int ID;
     private final SimpleStringProperty flight;
     private final SimpleStringProperty date;
     private final SimpleStringProperty time;
@@ -22,7 +23,8 @@ public class DA {
     private final SimpleStringProperty terminal;
     private final SimpleStringProperty gate;
 
-    public DA(String flight, String date, String time, String city, String company, String terminal, String gate) {
+    public DA(int ID, String flight, String date, String time, String city, String company, String terminal, String gate) {
+        this.ID = ID;
         this.flight = new SimpleStringProperty(flight);
         this.date = new SimpleStringProperty(date);
         this.time = new SimpleStringProperty(time);
@@ -32,6 +34,10 @@ public class DA {
         this.gate = new SimpleStringProperty(gate);
     }
 
+    public int getID() {
+        return ID;
+    }
+    
     public String getFlight() {
         return flight.get();
     }

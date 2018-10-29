@@ -25,7 +25,7 @@ public class PassanderListController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        System.out.println(Model.getCurrentFlightID()+100);
     }    
     
 }
